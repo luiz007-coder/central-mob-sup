@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[SUP] - Central de Aplicações Mobile</title>
+    <link rel="shortcut icon" href="https://www.habbo.com.br/habbo-imaging/badge/b09034s43131s50134s17113s1711594848847cad78ac939330154be639c58.gif" type="image/gif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>       
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #14452f;
+        }
+
+        .title-container {
+            position: relative;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .title-image {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: auto;
+            z-index: 1;
+        }
+
+        h1 {
+            margin-top: 20px;
+            z-index: 0;
+            color: white;
+        }
+        #menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #menu select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #f8f8ff;
+            border: 1px solid #ccc;
+        }
+
+        
+        #texto {
+            padding: 5px;
+            border: 1px solid #fff;
+            text-align: left;
+            border-radius: 5px;
+            background-color: #f8f8ff;
+            max-width: 100%;
+            white-space: pre-line;
+        }
+        .versao-app {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #14452f;
+            padding: 2px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #ccc;
+        }
+        .botao-copiar {
+            background-color: #189600;
+            border: none;
+            color: white;
+            padding: 2px 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 11px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-left: 10px;
+        }
+        .botao-copiar:hover {
+            background-color: #189600;
+        }
+        .botao-copiar:active {
+            animation: pulse 1s;
+        }
+        .copiado:before {
+            content: 'Copiado!';
+            margin-right: 5px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #creditos {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 20px;
+            color: #ccc;
+        }
+
+        .nome-idealizador {
+            margin-bottom: 5px;
+            display: block;
+            color: #ccc;
+        }
+
+        .nome-desenvolvedor {
+            margin-bottom: 5px;
+            display: block;
+            color: #ccc;
+
+        }
+
+        .nick {
+            animation: rainbow 7s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+        color: red;
+    }
+
+    14% {
+        color: orange;
+    }
+
+    28% {
+        color: yellow;
+    }
+
+    42% {
+        color: green;
+    }
+
+    56% {
+        color: blue;
+    }
+
+    70% {
+        color: indigo;
+    }
+
+    84% {
+        color: violet;
+    }
+
+    100% {
+        color: red;
+    }
+        }
+
+        .descricao {
+            font-style: italic;
+            color: #189600;
+            margin-top: 5px;
+            font-size: 7px;
+        }
+        span.texto-principal {
+            font-size: 7px;
+        }
+
+        #welcome-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2e2e2e;
+            color: #ffffff;
+            padding: 11px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 65%;
+            z-index: 9999;
+        }
+
+        #welcome-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        #welcome-card strong {
+            font-weight: bold;
+        }
+
+        #ok-button {
+            background-color: #189600;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #ok-button:hover {
+            background-color: #147a00;
+        }
+
+        #ok-button:active {
+            transform: scale(0.95);
+        }
+
+        #clock {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            overflow: hidden;
+            padding: 9px;
+            border-radius: 10px;
+            background-color: #14452f;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 12px;
+            color: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <p id="clock"></p>
+    <div class="versao-app"> v1.0 </div>
+    <div class="title-container">
+        <img class="title-image" src="https://www.habbo.com.br/habbo-imaging/badge/b09034s43131s50134s17113s1711594848847cad78ac939330154be639c58.gif" alt="Badge">
+        <h1>[SUP] - Central de Aplicações Mobile</h1>
+    </div>
+    <div id="welcome-card">
+        <p>BEM-VINDO(A)!</p>
+        <p>Este programa foi feito especialmente para facilitar o envio de script para usuários mobiles.</p>
+        <p>Para uma melhor experiência, use na horizontal.</p>
+        <p>Quaisquer dúvidas e erros, contate .Lord.</p>
+        <button id="ok-button">OK</button>
+    </div>
+    <div id="menu">
+        <select id="seletor">
+            <option value="CURSO">Script</option>
+            <option value="SUP">SUP</option>
+            <option value="SEG">SEG</option>
+            <option value="PRO">PRO</option>
+        </select>
+        <select id="tipoConteudo">
+            <option value="ESCOLHA">Opção</option>
+            <option value="INTRODUCAO">Introdução</option>
+            <option value="JOGO">Pelo Habbo</option>
+            <option value="SLIDE">Pelo Slide</option>
+            <option value="FINALIZACAO">Finalização</option>
+            <option value="POSTAGEM">Postagem</option>
+        </select>
+    </div>
+
+    <div id="conteudo">
+        <div id="texto">Escolha o script da aula e boa aplicação!</div>
+    </div>
+
+    <div id="creditos">
+        <span class="nome-idealizador">Idealizado por ofranco6830 & -Monteiro.</span>
+        <span class="nome-desenvolvedor"><span class="nick"><i class="fa-solid fa-code"></i></span> Desenvolvido por <span class="nick">.Lord</span></span>
+        <span class="nome-idealizador">Todos os direitos reservados à Companhia dos Supervisores ©</span>
+    </div>
+
+    <script>
+        var scripts = {
+            SUP: { 
+
+                INTRODUCAO: [
+                { texto: "INTRODUÇÃO", descricao: "⤳ Supervisor, se a aula estiver sendo ministrada em sala de aula, pule as duas falas abaixo."},
+                { texto: "Saudações, soldado!" },
+                { texto: "Consegue sussurrar comigo?", descricao: "⤷ Aguarde a resposta do(a) soldado." },
+                { texto: "Saudações, soldado!" },
+                { texto: "Sou o supervisor que aplicará sua supervisão." },
+                { texto: "Durante este curso, você deverá acessar e criar conta em duas plataformas" },
+                { texto: "essenciais para o funcionamento da polícia RCC: o fórum e o RCCSystem." },
+                { texto: "Peço que se mantenha ativo no Habbo e envie uma mensagem a cada 3 minutos" },
+                { texto: "para evitar a inatividade e ser expulso do quarto.", descricao: "⤳ Caso estiver sendo ministrada no Centro de Instruções, envie as falas abaixo:" },
+                { texto: "Lembre-se também de permanecer atento ao batalhão para, se necessário," },
+                { texto: "responder aos comandos de SENTIDO e À VONTADE." },
+                { texto: "Entendido, soldado?", descricao: "⤷ Aguarde a resposta do(a) soldado." },
+                { texto: "Você prefere receber o conteúdo aqui ou deseja a opção via slides?", descricao: "⤷ A partir daqui, registre um printscreen para se prevenir de uma possível queda por parte do aluno. Lembre-se: o histórico deve estar visível." },
+                { texto: "Para usuários mobile, recomendo a opção de conteúdo enviado aqui.", descricao: "⤷ Siga com o modelo escolhido pelo(a) soldado." }
+            ],
+                JOGO: [
+                { texto: "FÓRUM" },
+                { texto: "Você já possui conta ativa no fórum da polícia RCC?", descricao: "⤷ Se sim, pule para RCCSystem. Caso contrário, continue." },
+                { texto: "Para criar uma conta no fórum, acesse:" },
+                { texto: "policiarcc*com/forum (troque o * por .)" },
+                { texto: "Ao acessar, me avise e darei continuidade.", descricao: "⤷ Aguarde o(a) soldado responder." },
+                { texto: "Agora, clique em 'conectar-se', após isso uma janela se abrirá," },
+                { texto: "vá na opção 'registrar-se' e, em seguida, avise-me.", descricao: "⤷ Aguarde o(a) soldado responder." },
+                { texto: "Para que faça seu registro," },
+                { texto: "é importante que siga as seguintes orientações:" },
+                { texto: "1 - Lembre-se de utilizar exatamente o mesmo nick do habbo hotel;" },
+                { texto: "2 - Não use a sua senha do habbo;" },
+                { texto: "3 - Utilize dados sob sua responsabilidade, ou seja, email verificado e" },
+                { texto: "sob sua alçada;" },
+                { texto: "4 - Não publique seus dados pessoais em nenhuma plataforma de conversa;" },
+                { texto: "5 - Senhas e dados reais de contas bancárias e contas em redes sociais NÃO" },
+                { texto: "são exigidas para a criação da conta. Caso encontre esse tipo de" },
+                { texto: "informação na página, me avise antes de enviar qualquer dado." },
+                { texto: "Alguma dúvida até aqui?", descricao: "⤷ Aguarde o(a) soldado responder." },
+                { texto: "Para que sua conta seja criada, é preciso que clique em 'eu aceito os" },
+                { texto: "termos', o que sugere que está de acordo com os termos de segurança." },
+                { texto: "Finalize o seu cadastro clicando em 'salvar' e, em seguida, avise-me.", descricao: "⤷ Aguarde o(a) soldado responder." },
+                { texto: "Muito bem! Agora, basta aguardar que um administrador ative a sua conta" },
+                { texto: "para que consiga acessá-la." },
+                { texto: "<hr>RCCSYSTEM" },
+                { texto: "Você já possui conta ativa no RCCSystem?", descricao: "⤷ Caso confirme, confira. Caso contrário, continue com o script." },
+                { texto: "Para ativar a sua conta no RCCSystem," },
+                { texto: "acesse: system.policercc.com.br" },
+                { texto: "Avise-me ao acessar.", descricao: "⤷ Aguarde o(a) soldado responder." },
+                { texto: "Ao acessar, clique em 'Ativar conta'." },
+                { texto: "Você será redirecionado para a página de registro e deverá preencher" },
+                { texto: "de acordo com seus dados." },
+                { texto: "Lembre-se:" },
+                { texto: "- Preencha corretamente com seu nick do Habbo;" },
+                { texto: "- Não repita a mesma senha que utiliza no Habbo, Fórum ou System;" },
+                { texto: "- Antes de clicar em “ativar”, copie o código, cole na sua missão do Habbo" },
+                { texto: "e aperte a tecla “enter” do seu teclado. Logo após, clique em “ativar”." },
+                { texto: "Conclua o seu registro e, assim que finalizar, me avise.", descricao: "⤷ Aguarde o(a) soldado responder e confira se foi ativada." },
+                { texto: "Alguma dúvida?", descricao: "⤷ Se sim, ajude-o(a). Caso contrário, prossiga." }
+            ],
+                SLIDE: [
+                    { texto: "FÓRUM" },
+                    { texto: "Você já possui conta ativa no fórum da polícia RCC?", descricao: "⤷ Se SIM, pule para RCCSystem. Caso a resposta for NÃO, continue com o script." },
+                    { texto: "Para criar a sua conta, acesse linktr.ee/SUPRCC e siga o tutorial do primeiro link." },
+                    { texto: "Avise ao terminar a leitura da primeira parte do slide.", descricao: "⤷ Aguarde o(a) soldado responder." },
+                    { texto: "Muito bem! Agora, basta aguardar que um administrador ative a sua conta" },
+                    { texto: "para que consiga acessá-la." },
+                    { texto: "<hr>SYSTEM"},
+                    { texto: "Você já possui conta ativa no RCCSystem?", descricao: "⤷ Confira se ele(a) a possui. Caso contrário, continue com o script." },
+                    { texto: "Acesse linktr.ee/SUPRCC, abra o primeiro link e leia a partir da página 6."},
+                    { texto: "Me informe ao finalizar a ativação.", descricao: "⤷ Confira se foi ativada. Caso o(a) soldado possuir dúvidas, auxilie-o(a)." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, ajude-o(a). Caso contrário, prossiga." }
+            ],
+
+                FINALIZACAO: [
+                    { texto: "FINALIZAÇÃO" },
+                    { texto: "Parabéns, você concluiu a supervisão de soldados!" },
+                    { texto: "Acrescente [SUP] ao final de sua missão, ficando da seguinte maneira:" },
+                    { texto: "[CAS/SUP]." },
+                    { texto: "Você expandirá seu conhecimento sobre a utilidade e funcionalidade das" },
+                    { texto: "plataformas na próxima patente." },
+                    { texto: "Aguarde enquanto realizo a postagem de sua aula.", descricao: "⤷ Após aqui, prossiga para o campo de POSTAGEM."},
+            ],
+                POSTAGEM: [
+                { link: "https://docs.google.com/forms/d/e/1FAIpQLScA23uVDnBLikVaYg9KKCrWzFy-HKkEMwDNlhy7QuuGj1qz3Q/viewform", titulo: "Poste sua aula clicando aqui." },
+                { link: "https://docs.google.com/spreadsheets/d/15olIMB0HWvA36xvliBX4_eR_JIxOkL19rZ07Rtx0D6o/edit#gid=1556351985", titulo: "Confira sua postagem aqui." },
+                { link: "https://system.policercc.com.br/companhia/supervisores", titulo: "Poste sua aula no System aqui." },
+                ]
+            },
+            SEG: {
+                
+                INTRODUCAO: [
+                { texto: "Saudações, militar." },
+                { texto: "Eu sou o(a) supervisor(a) que ministrará sua Aula de Segurança (SEG)." },
+                { texto: "Peço que mantenha a postura adequada de um militar durante toda a aula." },
+                { texto: "Caso eu caia, aguarde-me por 5 minutos na sala. Se eu não retornar, dirija-se de volta ao batalhão." },
+                { texto: "É importante que você faça anotações, pois todo o conteúdo será relevante para sua carreira." },
+                { texto: "Você prefere que eu transmita o conteúdo diretamente aqui ou deseja a opção via slides?" },
+                { texto: "Para usuários mobile, recomendo a opção de conteúdo enviado diretamente aqui.", descricao: "⤷ Siga com o modelo escolhido pelo aluno" },
+                ],
+                
+                JOGO: [
+                    { texto: "SEGURANÇA DO USUÁRIO" },
+                    { texto: "Serão apresentadas algumas dicas para a proteção de sua conta." },
+                    { texto: "É essencial que siga à risca para que não tenha sua conta invadida ou seja enganado:" },
+                    { texto: "- Não compartilhe seus dados mesmo que seja parente/amigo, pois o comprometimento de suas contas não" },
+                    { texto: "será tolerado e, consequentemente, resultará em punição;" },
+                    { texto: "- Não escreva suas senhas em locais de fácil acesso;" },
+                    { texto: "- Não acesse sites que ofereçam moedas;" },
+                    { texto: "- Não aceite e/ou acesse arquivos/links estranhos;" },
+                    { texto: "- Não participe de apostas, poderão te passar a perna;" },
+                    { texto: "- Não compre moedas de estranhos com dinheiro real;" },
+                    { texto: "- Não aceite suborno em troca de algo e/ou seja omisso ao crime." },
+                    { texto: "Além das dicas citadas, crie um e-mail e senhas diferentes para habbo, fórum e system, pois essa" },
+                    { texto: "medida de segurança garante a proteção tanto das dependências da Polícia RCC quanto das suas contas" },
+                    { texto: "individuais. Caso você tenha dúvidas sobre como alterar as suas senhas, procure um oficial para" },
+                    { texto: "orientações adicionais. Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>SEGURANÇA DOS POLICIAIS" },
+                    { texto: "Em nossa instituição é importante saber a definição de 'contas fakes' e como identificá-las.o" },
+                    { texto: "Fakes é a definição de policiais falsos, seja por falsificação de cargos ou patentes ou falsificação" },
+                    { texto: "de nome. Para identificar um fake devemos sempre observar as suas ações, data de criação da conta," },
+                    { texto: "nível/placar de conquistas, amigos, grafia, conduta, entre outros." },
+                    { texto: "Além disso, pode ser encontrado fakes pelos nicks, por exemplo: Guilherme pode ser confundido com" },
+                    { texto: "GuiIherme (com i maiúsculo) ou Marcos.- pode ser confundido com Marcos.-. (possuindo ponto final)." },
+                    { texto: "Há também como identificar uma falsificação de cargo/patente, para isso verifique o perfil no" },
+                    { texto: "RCCSystem. Caso constate uma falsificação, avise um oficial que seja superior ao envolvido." },
+                    { texto: "É necessário saber agir diante de emergências envolvendo sua conta." },
+                    { texto: "Caso sua conta seja hackeada, procure imediatamente um militar da patente de general+ ou" },
+                    { texto: "superintendente+ com Especialização Intermediária para que tenha sua conta transferida." },
+                    { texto: "O oficial utilizará métodos para comprovar sua identidade e irá garantir que seja retirado dos" },
+                    { texto: "grupos da Polícia RCC para evitar danos à instituição. Ter a conta comprometida é um crime, sendo" },
+                    { texto: "passível de um rebaixamento até exoneração, a depender dos danos causados na instituição." },
+                    { texto: "Além disso, todos devem manter as configurações do habbo conforme as normativas." },
+                    { texto: "É exigido que policiais ativos e que não possuam permissão da Supremacia ou Setor de Inteligência" },
+                    { texto: "para tal, mantenham-se com a visibilidade do perfil e modo online ativo. O oficial ou praça que faça" },
+                    { texto: "parte de uma companhia que descumprir esta norma sofrerá um rebaixamento imediato de um" },
+                    { texto: "cargo/patente a cada 24 horas que se passarem; Os praças de ambos os corpos que ainda não" },
+                    { texto: "ingressaram em uma companhia, serão orientados acerca da irregularidade e, em caso de reincidência" },
+                    { texto: "e/ou permanência, sofrerão um rebaixamento a cada 24 horas. Portanto, lembre-se de manter sua conta" },
+                    { texto: "com visibilidade e no modo online!" },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>SEGURANÇA DO BATALHÃO" },
+                    { texto: "Para manter a segurança do batalhão devemos sempre estar de olho em possíveis ameaças." },
+                    { texto: "Enquanto estiver na Sala de Estado (fora de funções), utilize a percepção para ajudar a manter o" },
+                    { texto: "batalhão seguro. Caso presencie algo de errado e/ou suspeito como: má conduta, nicks inapropriados" },
+                    { texto: "e/ou baderneiros, avise ao Oficial da Guarda para que tome as devidas providências." },
+                    { texto: "Caso esteja em função, acompanhe as seguintes medidas de segurança:" },
+                    { texto: "Recepção: observar se o civil tem nome inapropriado e/ou está apenas querendo bagunçar." },
+                    { texto: "Caso isso aconteça, não permita a entrada do mesmo, avise ao Cabo da Guarda." },
+                    { texto: "Sentinela: manter a porta de acesso ao Corredor dos Instrutores fechada para que evite invasões." },
+                    { texto: "Operador 01: conferir com atenção a missão e o fardamento do policial, verificando se este está de" },
+                    { texto: "acordo com as normas do Anexo I do Código de Conduta Militar." },
+                    { texto: "Operador 02: conferir se o policial possui grupo de outras organizações policiais em seu perfil," },
+                    { texto: "verificando também os donos dos grupos dos quais faz parte. Os donos dos grupos oficiais da Polícia" },
+                    { texto: "RCC são os usuários: RCCEmblemas / -Edhone / Mine315-BAN / douglasfon71." },
+                    { texto: "Caso sejam membros da GOPH, os donos são: Org-GOPH. / dr.jefferson105." },
+                    { texto: "Operador 03: conferir as TAG's corretamente sem margem de erro. Para facilitar a verificação," },
+                    { texto: "sussurre com o policial, copie o nick dele (control + c) e cole (control + v) no local de pesquisa." },
+                    { texto: "O RCCSystem direciona ao perfil do militar, caso contrário, o usuário NÃO CONSTA." },
+                    { texto: "Porém, há casos que o site direciona e o policial está com o ESTADO INATIVO, caso isso ocorra também" },
+                    { texto: "não deve liberar a entrada no militar, ele terá que realizar novo alistamento." },
+                    { texto: "Após localizar a TAG veja se é igual à que possui em sua missão." },
+                    { texto: "Operador 04: conferir se o recruta possui nick inapropriado ou apresenta conduta imprópria e deve" },
+                    { texto: "verificar se o recruta consta como policial ATIVO ou EXONERADO, inibindo a passagem caso constem." },
+                    { texto: "Para conferir no RCCSystem, utilize do mesmo método supracitado na função de operador 03 (sussurro)." },
+                    { texto: "Lembre-se que o operador 03 ou operador 04 e Auxiliar Operacional responsável por liberar um usuário" },
+                    { texto: "IRREGULAR, EXONERADO ou FAKE será punido, com 50 medalhas efetivas negativas pelo crime de" },
+                    { texto: "Abandono de Dever/Negligência. Caso um militar ATIVO seja liberado no Operador 4," },
+                    { texto: "aplica-se a punição ao Operador 4 e Auxiliar Operacional. Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>SEGURANÇA PESSOAL" },
+                    { texto: "Na Polícia RCC, em muitas situações, é necessário apresentar provas de acontecimentos." },
+                    { texto: "Para isso, utilizamos a captura de tela (printscreen)." },
+                    { texto: "Você sabe como tirar um printscreen e hospedá-la em um site?", descricao: "⤷ Siga conforme a resposta do aluno." },
+                ],
+                SLIDE: [
+                    { texto: "Acesse bitHly/AULASEG (troque o ''H'' por ''.'') em seu navegador e leia o slide." },
+                    { texto: "Se você não souber como tirar um printscreen e hospedá-lo, acesse linktr.ee/SUPRCC e leia o" },
+                    { texto: "slide encontrado no segundo link. Evite a inatividade e avise-me assim que terminar a leitura.", descricao: "⤷ Aguarde o aluno finalizar a leitura." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga para o TESTE TEÓRICO." }
+                ],
+
+                FINALIZACAO: [
+                { texto: "TESTE TEÓRICO" },
+                { texto: "Neste teste, farei algumas perguntas relacionadas à aula." },
+                { texto: "Você terá quatro (04) MINUTOS para responder cada pergunta." },
+                { texto: "Se errar alguma questão, será reprovado(a). Preste atenção e boa sorte!" },
+                { texto: "Utilize o sussurro para enviar a resposta." },
+                { texto: "Se enviado fora do sussurro, será reprovado.", descricao: "⤷ Envie esses dois em caso de 2 ou mais alunos." },
+                { texto: "1. Como prevenir perdas/danos em sua conta? Cite 3 exemplos.", descricao: "R: O aluno deve citar 3 exemplos citados no script" },
+                { texto: "2. O que fazer caso seja hackeado(a)?", descricao: "R: Procurar imediatamente um oficial da patente de general+ ou superintendente+ com especialização intermediária" },
+                { texto: "3. Como identificar um fake?", descricao: "R: nick, ações, data de criação da conta, nível/placar de conquistas, amigos, grafia, conduta, etc" },
+                { texto: "Infelizmente, por errar no teste teórico, está reprovado(a). Mas não desanime!" },
+                { texto: "Os supervisores estarão dispostos a lhe aplicar a aula novamente.", descricao: "⤷ EM CASO DE APROVAÇÃO NO TESTE TEÓRICO, PROSSIGA PARA O TESTE PRÁTICO:" },
+                { texto: "<hr>TESTE PRÁTICO" },
+                { texto: "Neste teste, você deverá desempenhar a função de Operador 03 da sala de controle com excelência." },
+                { texto: "Serão enviados os nicknames de dois indivíduos, e você deverá verificar o status atual do perfil no" },
+                { texto: "RCCSystem e enviar uma resposta para cada militar, conforme os modelos abaixo:" },
+                { texto: "Nick - Não consta / Nick - Inativo" },
+                { texto: "Nick - Ativo / Nick - Exonerado" },
+                { texto: "Você deve enviar a resposta em até seis (06) minutos após o envio dos dois nicknames." },
+                { texto: "Caso erre ou ultrapasse o tempo, será reprovado(a) na aula.", },
+                { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                { texto: "Abra a página inicial do RCC System e avise-me quando terminar.", descricao: "⤷ Aguarde o aluno responder." },
+                { texto: "Lembre-se do conteúdo passado nos tópicos anteriores. Boa sorte!" },
+                { texto: "Utilize o sussurro para enviar a resposta." },
+                { texto: "Se enviado fora do sussurro, será reprovado.", descricao: "⤷ Envie esses 2 textos caso haja 2 ou mais alunos." },
+                { texto: "-Anderson...", descricao: "⤷ Não consta." },
+                { texto: "X.x.Matheu.x.X.", descricao: "⤷ Não consta." },
+                { texto: "GuermeDH", descricao: "⤷ Exonerado." },
+                { texto: "1234-gigi-4321", descricao: "⤷ Ativa." },
+                { texto: "Amarei", descricao: "⤷ Não consta." },
+                { texto: "TheteuT", descricao: "⤷ Inativo." },
+                { texto: "Infelizmente, por errar no teste prático, está reprovado(a). Mas não desanime!" },
+                { texto: "Os supervisores estarão dispostos a lhe aplicar a aula novamente.", descricao: "⤷ Caso reprove!" },
+                { texto: "Parabéns, você foi aprovado(a) na aula de segurança! Acrescente '/SEG' em sua missão." },
+                { texto: "Exemplo: [CFC/SEG] ou [API/SEG] (desconsidere caso seja secretário+)." },
+                { texto: "Caso seja cabo ou assessor, coloque um brevê (estrela) branco em sua cabeça.", descricao: "⤷ Caso aprove!" },
+                { texto: "A companhia dos Supervisores preparou um conteúdo didático para ajudar os usuários que não estão" },
+                { texto: "familiarizados com o Habbo Launcher, tanto para computador quanto para dispositivos móveis." },
+                { texto: "Se você ainda não utiliza o Launcher, recomendamos acessar linktr.ee/SUPRCC e consultar o slide" },
+                { texto: "disponível no terceiro link para melhorar sua experiência de jogo. Lembre-se de que, se surgir" },
+                { texto: "alguma dúvida, não hesite em procurar um oficial para receber assistência." },
+                { texto: "Desejo-lhe sucesso em sua carreira! Agora, vamos retornar." },
+            ],
+
+            POSTAGEM: [
+            { link: "https://docs.google.com/forms/d/e/1FAIpQLScA23uVDnBLikVaYg9KKCrWzFy-HKkEMwDNlhy7QuuGj1qz3Q/viewform", titulo: "Poste sua aula clicando aqui." },
+                { link: "https://docs.google.com/spreadsheets/d/15olIMB0HWvA36xvliBX4_eR_JIxOkL19rZ07Rtx0D6o/edit#gid=1556351985", titulo: "Confira sua postagem aqui." },
+                { link: "https://system.policercc.com.br/companhia/supervisores", titulo: "Poste sua aula no System aqui." },
+            ]
+            },
+            PRO: {
+                INTRODUCAO: [
+                { texto: "Saudações, militar." },
+                { texto: "Eu sou o(a) supervisor(a) que ministrará a sua Aula de Promotor (PRO)." },
+                { texto: "Peço que mantenha a postura adequada de um militar durante toda a aula." },
+                { texto: "Caso eu caia, aguarde-me por 5 minutos na sala. Se eu não retornar, dirija-se de volta ao batalhão." },
+                { texto: "É importante que você faça anotações, pois todo o conteúdo será relevante para sua carreira." },
+                { texto: "Você prefere que eu transmita o conteúdo diretamente aqui ou deseja a opção via slides?" },
+                ],
+                JOGO: [
+                    { texto: "PROMOÇÃO" },
+                    { texto: "Promover um militar não significa apenas alocá-lo a um cargo superior na hierarquia." },
+                    { texto: "É importante ter senso de observação e conhecimento crítico antes de promover alguém." },
+                    { texto: "Por isso, certifique-se de que o policial será excelente para o próximo posto." },
+                    { texto: "Cada patente/cargo exige requisitos diferentes. Por exemplo, um soldado geralmente é" },
+                    { texto: "promovido baseado em boa ortografia e desempenho na recepção, já um aspirante," },
+                    { texto: "para que seja promovido, precisa apresentar aspectos como:" },
+                    { texto: "desempenho no batalhão e companhia, presença, rigidez, postura, etc." },
+                    { texto: "No requerimento da promoção, coloque TODOS os motivos que te levaram a elevar o militar" },
+                    { texto: "na hierarquia, como: conduta, presença, desempenho em questões realizadas," },
+                    { texto: "funções assumidas, grafia, etc." },
+                    { texto: "Caso ainda tenha dúvidas na postagem, solicite o auxílio do oficial que lhe deu a" },
+                    { texto: "permissão para a postagem da promoção ou qualquer militar presente no batalhão." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>REBAIXAMENTO & DEMISSÃO" },
+                    { texto: "Existem 6 (seis) punições administrativas, sendo elas: advertência verbal, medalhas" },
+                    { texto: "efetivas negativas, advertência escrita, rebaixamento, demissão e exoneração." },
+                    { texto: "O rebaixamento é uma punição intermediária que geralmente é utilizada quando existe" },
+                    { texto: "alguma transgressão disciplinar, ou seja, crimes descritos nos documentos, como:" },
+                    { texto: "conduta imprópria, desrespeito/insubordinação, abuso de poder, etc." },
+                    { texto: "Vale ressaltar que todos os crimes possuem punições gradativas, portanto, não é" },
+                    { texto: "todo desrespeito que acarretará em um rebaixamento, vai depender da situação." },
+                    { texto: "A demissão é uma punição mais severa, geralmente aplicada em uma transgressão" },
+                    { texto: "disciplinar grave, como por exemplo, cometer o crime de traição." },
+                    { texto: "Procure por um superior sempre que tiver dúvidas em resoluções de casos." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>DIÁLOGOS PÓS-PROMOÇÃO & REBAIXAMENTO" },
+                    { texto: "Os diálogos são como conversas que devem ter foco na doutrinação do policial" },
+                    { texto: "promovido/rebaixado. Enquanto no Diálogo Pós-Promoção (DPP) deve conter assuntos como:" },
+                    { texto: "os desafios da nova patente/cargo, novas responsabilidades, comprometimento e críticas sobre" },
+                    { texto: "como o promovido pode melhorar, o Diálogo Pós-Rebaixamento (DPR) deve ser formal, focado" },
+                    { texto: "na correção da postura do militar punido e na motivação pela melhora do seu comportamento." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>REGRAS" },
+                    { texto: "A partir da aprovação desta aula, você estará apto a ser um promotor (realizar promoções, rebaixamentos e demissões)." },
+                    { texto: "Como subtenente, você poderá promover até sargento/equivalência com a permissão de" },
+                    { texto: "um oficial do Corpo Militar ou Corpo Executivo com Especialização Intermediária ou superior." },
+                    { texto: "Para saber qual especialização o membro do Corpo Executivo possui, confira no perfil do" },
+                    { texto: "policial no RCCSystem na aba 'dados primários', logo abaixo de sua TAG de identificação." },
+                    { texto: "Em casos de transgressões cometidas por um subordinado, você terá autonomia para punir" },
+                    { texto: "sem necessidade de permissão." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                    { texto: "<hr>PERMISSÕES" },
+                    { texto: "Todas as permissões devem ser registradas no RCCSystem na aba de “PERMISSÕES” e" },
+                    { texto: "apresentadas no requerimento. Para evitar ser punido, espere que o concessor da permissão" },
+                    { texto: "realize a postagem dela antes de postar o seu requerimento. Para assegurar-se, é obrigatório que" },
+                    { texto: "registre um printscreen do oficial confirmando a permissão, armazenando-o caso seja necessário." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." },
+                ],
+                SLIDE: [
+                    { texto: "Acesse bit*ly/PROSUP (troque o ''*'' por ''.'') em seu navegador e leia o slide." },
+                    { texto: "Evite a inatividade e avise-me assim que terminar a leitura.", descricao: "⤷ Aguarde o aluno finalizar a leitura." },
+                    { texto: "Alguma dúvida?", descricao: "⤷ Se sim, retire-a. Se não, prossiga." }
+            ],
+                FINALIZACAO: [
+                { texto: "TESTE TEÓRICO" },
+                { texto: "Neste teste, farei algumas perguntas relacionadas à aula." },
+                { texto: "Você terá quatro (04) MINUTOS para responder cada pergunta." },
+                { texto: "Se errar alguma questão, será reprovado(a). Preste atenção e boa sorte!" },
+                { texto: "Utilize o sussurro para enviar a resposta." },
+                { texto: "Se enviado fora do sussurro, será reprovado.", descricao: "⤷ Envie esses 2 textos caso tiver 2 ou mais alunos." },
+                { texto: "1. Cite 3 (três) requisitos que podemos observar em um policial antes de promovê-lo.", descricao: "R: Citar 3 das localizadas no script." },
+                { texto: "2. Qual o objetivo do Diálogo Pós-Promoção (DPP)?.", descricao: "R: Ela faz com que promotor e promovido conversem, assim o promotor poderá acompanhar, motivar e capacitar o promovido." },
+                { texto: "3. De quem/qual permissão um Subtenente precisa ter para executar uma promoção?", descricao: "R: De um Oficial do Corpo Militar ou de um Oficial do Corpo Executivo com Especialização Intermediária." },
+                { texto: "4. Ao ser concedida qualquer permissão, é necessário efetuar o registro de capturas de tela? Explique.", descricao: "R: Sim, é obrigatório que registre um printscreen do policial confirmando a permissão, armazenando para provarem caso de necessidade." },
+                { texto: "Infelizmente, por errar no teste teórico, está reprovado(a). Mas não desanime!" },
+                { texto: "Os supervisores estarão dispostos a lhe aplicar a aula novamente.", descricao: "⤷ Envie esses 2 textos caso o(s) aluno(s) reprove(m)." },
+                { texto: "Parabéns, você foi aprovado(a) na aula de promotor! Acrescente '/PRO' em sua missão." },
+                { texto: "Exemplo: [CAP/PRO]. Para expandir seus conhecimentos sobre rebaixamentos e promoções, acesse linktr.ee/SUPRCC," },
+                { texto: "clique no quarto link e leia o material preparado pela companhia dos Supervisores!" },
+                { texto: "Desejo-lhe sucesso em sua carreira!", descricao: "⤷  Caso o(s) aluno(s) aprove(m)." },
+                ],
+
+                POSTAGEM: [
+                { link: "https://docs.google.com/forms/d/e/1FAIpQLScA23uVDnBLikVaYg9KKCrWzFy-HKkEMwDNlhy7QuuGj1qz3Q/viewform", titulo: "Poste sua aula clicando aqui." },
+                { link: "https://docs.google.com/spreadsheets/d/15olIMB0HWvA36xvliBX4_eR_JIxOkL19rZ07Rtx0D6o/edit#gid=1556351985", titulo: "Confira sua postagem aqui." },
+                { link: "https://system.policercc.com.br/companhia/supervisores", titulo: "Poste sua aula no System aqui." },
+                ]
+            }
+        };
+
+        var seletor = document.getElementById("seletor");
+        var tipoConteudo = document.getElementById("tipoConteudo");
+        var textoDiv = document.getElementById("texto");
+
+        seletor.addEventListener("change", function() {
+            var opcaoSelecionada = this.value;
+            var tipoSelecionado = tipoConteudo.value;
+            var texto = scripts[opcaoSelecionada][tipoSelecionado];
+            adicionarTexto(texto);
+        });
+
+        tipoConteudo.addEventListener("change", function() {
+            var opcaoSelecionada = seletor.value;
+            var tipoSelecionado = this.value;
+            var texto = scripts[opcaoSelecionada][tipoSelecionado];
+            adicionarTexto(texto);
+        });
+
+        document.getElementById('ok-button').addEventListener('click', function() {
+            document.getElementById('welcome-card').style.display = 'none';
+        });
+        
+        function adicionarLink(link, titulo) {
+    return "<a href='" + link + "' target='_blank'>" + (titulo ? titulo : link) + "</a>";
+}
+
+function updateTime() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    hours = ("0" + hours).slice(-2);
+    minutes = ("0" + minutes).slice(-2);
+    seconds = ("0" + seconds).slice(-2);
+
+    document.getElementById('clock').textContent = hours + ":" + minutes + ":" + seconds;
+
+    setTimeout(updateTime, 1000);
+}
+
+window.onload = updateTime;
+
+
+function adicionarTexto(texto) {
+    var html = "";
+    texto.forEach(function(item) {
+        if (item.texto) {
+            html += "<div class='linha-texto'><span class='texto-principal'>" + item.texto + "</span><button class='botao-copiar' onclick='copiarTexto(this)'>Copiar</button><div class='descricao'>" + (item.descricao ? item.descricao : "") + "</div></div>";
+        } else if (item.link) {
+            html += "<div class='linha-texto'>" + adicionarLink(item.link, item.titulo) + "</div>";
+        }
+    });
+    textoDiv.innerHTML = html;
+}
+
+
+        function copiarTexto(botao) {
+            var texto = botao.previousElementSibling.textContent;
+            navigator.clipboard.writeText(texto)
+                .then(function() {
+                    botao.innerHTML = "Copiado!";
+                    setTimeout(function() {
+                        botao.innerHTML = "Copiar";
+                    }, 1000);
+                })
+                .catch(function(error) {
+                    console.error('Erro ao copiar texto:', error);
+                });
+        }
+    </script>
+</body>
+</html>
